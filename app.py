@@ -27,7 +27,12 @@ def ask():
 
     data = request.get_json()
 
-    question = data.get("question", "What is 5G?")
+    question = data.get("question", "").strip()
+
+if not question:
+    return jsonify({
+        "error": "Please ask a telecommunications-related question."
+    }), 400
 
     api_key = get_api_key()
 
